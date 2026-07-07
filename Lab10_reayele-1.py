@@ -30,6 +30,10 @@ class WordAnalyzer:
             print("5. Exit")
 
             choice = input("\nEnter your choice (1-5): ")
-        
-    if __name__ == "__main__":
-        main()
+            if choice == "5":
+                print("\nGoodbye!")
+                break
+
+            else:
+                print("\nInvalid choice. Please select from 1-5.")
+                input("\nPress Enter to return to the menu...")
