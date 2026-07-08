@@ -1,8 +1,9 @@
 """
 Program name: Word Analyzer 
 Author: Rediet Ayele 
-Purpose: 
-Date: 07/07/26
+Purpose: Analyzes a file and counts the frequency of each word
+Starter Code: None
+Date: 07/08/26
 """
 
 import pathlib
