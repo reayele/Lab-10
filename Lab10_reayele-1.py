@@ -17,25 +17,30 @@ class WordAnalyzer:
     def process_file(self):
         try:
             if not self.__filepath.exists():
-                  raise FileNotFoundError
-            remove_punctuation = str.maketrans("", "", string.punctuation)
+                raise FileNotFoundError
+
+            remove_punctuation = str.maketrans("", "", string.punctuation + "“”‘’—")
+
             with self.__filepath.open("r", encoding="utf-8") as file:
-                  for line in file:
-                        line = line.lower()
-                        line = line.translate(remove_punctuation)
-                        words = line.split()
-                        
-                  for word in words:
-                    if word in self.__word_counts:
-                        self.__word_counts[word] += 1
-                    else:
-                        self.__word_counts[word] = 1
+                for line in file:
+                    line = line.lower()
+                    line = line.translate(remove_punctuation)
+                    words = line.split()
+
+                    for word in words:
+                        if word in self.__word_counts:
+                            self.__word_counts[word] += 1
+                        else:
+                            self.__word_counts[word] = 1
+
             return True
+
         except FileNotFoundError:
-              print("Error: File not found. ")
-              return False
+            print("Error: File not found.")
+            return False
         
-def print_report(self):
+    def print_report(self):
+
         words = list(self.__word_counts.keys())
         words.sort()
 
@@ -46,7 +51,7 @@ def main():
         files = {
              "1": pathlib.Path("princess_mars.txt"),
              "2": pathlib.Path("Tarzan.txt"),
-             "3": pathlib.Path("treasure_islands.txt"),
+             "3": pathlib.Path("treasure_island.txt"),
              "4": pathlib.Path("monte_cristo.txt")
         }
         while True:
@@ -60,7 +65,7 @@ def main():
 
             choice = input("\nEnter your choice (1-5): ")
             if choice in files: 
-                print("\nPrcoessing", files[choice], "...")
+                print("\nProcessing", files[choice], "...")
         
                 analyzer = WordAnalyzer(files[choice])
                 
@@ -76,7 +81,7 @@ def main():
                 print("\nInvalid choice. Please select from 1-5.")
                 input("\nPress Enter to return to the menu...")
 if __name__ == "__main__":
-                main()
+        main()
         
 
     
