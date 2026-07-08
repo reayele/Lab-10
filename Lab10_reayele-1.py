@@ -30,6 +30,9 @@ class WordAnalyzer:
             print("5. Exit")
 
             choice = input("\nEnter your choice (1-5): ")
+            if choice in files: 
+                print("\nPrcoessing", files[choice], "...")
+
             if choice == "5":
                 print("\nGoodbye!")
                 break
@@ -37,3 +40,37 @@ class WordAnalyzer:
             else:
                 print("\nInvalid choice. Please select from 1-5.")
                 input("\nPress Enter to return to the menu...")
+    if __name__ == "__main__":
+                main()
+        
+    files = {
+         "1": pathlib.Path("moby_dic_ch1.txt"),
+         "2": pathlib.Path("moby_dic_ch1.txt"),
+         "3": pathlib.Path("moby_dic_ch1.txt"),
+         "4": pathlib.Path("moby_dic_ch1.txt")
+    }
+    
+    def process_file(self):
+        """Read the file and count each word."""
+        try:
+            if not self.__filepath.exists():
+                raise FileNotFoundError
+            remove_punctuation = str.maketrans("", "", string.punctuation)
+            with self.__filepath.open("r", encoding="utf-8") as file:
+                for line in file:
+                    line = line.lower()
+                    line = line.translate(remove_punctuation)
+                    words = line.split()
+                    
+                    for word in words:
+                        if word in self.__word_counts:
+                            self.__word_counts[word] += 1
+                        else: 
+                            self.__word_counts[word] = 1
+            return True
+        except FileNotFoundError:
+            print("Error: File not found.")
+            return False
+
+
+            
